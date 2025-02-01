@@ -5,13 +5,26 @@
 //  Created by Austin Beck on 2/1/25.
 //
 
-import Testing
+import XCTest
 @testable import RecipeApp
 
-struct RecipeAppTests {
-
-    @Test func example() async throws {
-        // Write your test here and use APIs like `#expect(...)` to check expected conditions.
+final class ImageCacheTests: XCTestCase {
+    func testImageCaching() async throws {
+        let imageCache = ImageCache.shared
+        
+        // Use a known image URL for testing.
+        let imageURL = URL(string: "https://picsum.photos/200")!
+        
+        // First, capture the image from the cache (should be nil initially)
+        let initialCachedImage = await imageCache.image(for: imageURL)
+        XCTAssertNil(initialCachedImage)
+        
+        // Download the image.
+        let image = try await imageCache.loadImage(from: imageURL)
+        XCTAssertNotNil(image)
+        
+        // Now it should be in the cache; capture it first then assert.
+        let cachedImage = await imageCache.image(for: imageURL)
+        XCTAssertNotNil(cachedImage)
     }
-
 }
