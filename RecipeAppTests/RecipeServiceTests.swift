@@ -14,7 +14,6 @@ final class RecipeServiceTests: XCTestCase {
     func testFetchRecipesSuccess() async throws {
         // Given a valid URL, for example using a local JSON file bundled with tests.
         let service = RecipeService.shared
-        // For testing purposes we might override the URL or inject a URLSession.
         // Here I assume the live endpoint is available.
         do {
             let recipes = try await service.fetchRecipes()

@@ -14,15 +14,14 @@ enum RecipeServiceError: Error {
 
 class RecipeService {
     static let shared = RecipeService()
-    
-    // Use one of the endpoints provided.
+
     private let recipesURL = URL(string: "https://d3jbb8n5wk0qxi.cloudfront.net/recipes.json")!
     
     /// Fetches the list of recipes asynchronously.
     func fetchRecipes() async throws -> [Recipe] {
         let (data, response) = try await URLSession.shared.data(from: recipesURL)
         
-        // Check for HTTP errors (if needed)
+        // Check for HTTP errors
         guard let httpResponse = response as? HTTPURLResponse,
               (200..<300).contains(httpResponse.statusCode) else {
             throw URLError(.badServerResponse)

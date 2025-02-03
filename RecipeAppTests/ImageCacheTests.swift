@@ -12,7 +12,7 @@ final class ImageCacheTests: XCTestCase {
     func testImageCaching() async throws {
         let imageCache = ImageCache.shared
         
-        // Use a known image URL for testing.
+        // URl for placeholder image
         let imageURL = URL(string: "https://picsum.photos/200")!
         
         // First, capture the image from the cache (should be nil initially)

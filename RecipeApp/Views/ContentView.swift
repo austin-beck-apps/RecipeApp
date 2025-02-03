@@ -34,7 +34,7 @@ struct ContentView: View {
                 } else {
                     List(viewState.recipes) { recipe in
                         if viewState.isLargeView {
-                            // Large view layout: more spacious, uses the large image
+                            // Large view layout
                             VStack(alignment: .leading, spacing: 12) {
                                 AsyncImageView(url: recipe.photo_url_large)
                                     .aspectRatio(contentMode: .fill)
@@ -62,7 +62,7 @@ struct ContentView: View {
                             }
                             .padding(.vertical, 8)
                         } else {
-                            // Small view layout: HStack using the small image
+                            // Small view layout
                             HStack {
                                 AsyncImageView(url: recipe.photo_url_small)
                                     .frame(width: 80, height: 80)
@@ -96,7 +96,6 @@ struct ContentView: View {
             }
             .navigationTitle("Recipes")
             .toolbar {
-                // Add a segmented control in the navigation bar to toggle between view modes.
                 ToolbarItem(placement: .navigationBarLeading) {
                     Picker("View Mode", selection: $viewState.isLargeView) {
                         Text("Small").tag(false)
